@@ -50,7 +50,7 @@
             color: #E5E7EB;
         }
 
-        /* Hero com Carrossel */
+        /* Hero com Logo Circular */
         #inicio {
             background: #1C2526;
             color: #FFFFFF;
@@ -77,10 +77,127 @@
             z-index: 0;
         }
 
+        .logo-circle {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 1.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #FFFFFF;
+            z-index: 1;
+        }
+
+        .logo-circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        #inicio h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        #inicio p {
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            max-width: 90%;
+        }
+
+        .btn {
+            background-color: #1C2526;
+            color: #FFFFFF;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            margin: 0.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(255, 255, 255, 0.2);
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background-color: #4B5E60;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Sobre com Carrossel */
+        #sobre {
+            padding: 3rem 1rem;
+            background-color: #FFFFFF;
+            text-align: center;
+        }
+
+        #sobre h2 {
+            font-size: 1.8rem;
+            color: #1C2526;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        #sobre h2::after {
+            content: '';
+            width: 40px;
+            height: 2px;
+            background-color: #1C2526;
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        #sobre p {
+            max-width: 90%;
+            margin: 0 auto 1.5rem;
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #4B5E60;
+        }
+
+        .sobre-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            max-width: 90%;
+            margin: 0 auto 1.5rem;
+        }
+
+        .sobre-list li {
+            list-style: none;
+            font-size: 0.9rem;
+            color: #1C2526;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem;
+            background: #F8F9FA;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .sobre-list li:hover {
+            transform: translateY(-3px);
+        }
+
+        .sobre-list li i {
+            color: #1C2526;
+            font-size: 1.2rem;
+        }
+
         .carousel {
             position: relative;
             max-width: 90%;
-            margin: 0 auto 1.5rem;
+            margin: 0 auto;
             overflow: hidden;
             border-radius: 10px;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
@@ -123,102 +240,6 @@
         .carousel-controls button:hover {
             background: #E5E7EB;
             color: #1C2526;
-        }
-
-        #inicio h1 {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
-        }
-
-        #inicio p {
-            font-size: 1rem;
-            margin-bottom: 1.5rem;
-            max-width: 90%;
-        }
-
-        .btn {
-            background-color: #1C2526;
-            color: #FFFFFF;
-            padding: 0.8rem 1.5rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1rem;
-            margin: 0.5rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 4px rgba(255, 255, 255, 0.2);
-            display: inline-block;
-        }
-
-        .btn:hover {
-            background-color: #4B5E60;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(255, 255, 255, 0.3);
-        }
-
-        /* Sobre */
-        #sobre {
-            padding: 3rem 1rem;
-            background-color: #FFFFFF;
-            text-align: center;
-        }
-
-        #sobre h2 {
-            font-size: 1.8rem;
-            color: #1C2526;
-            margin-bottom: 1rem;
-            position: relative;
-        }
-
-        #sobre h2::after {
-            content: '';
-            width: 40px;
-            height: 2px;
-            background-color: #1C2526;
-            position: absolute;
-            bottom: -8px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        #sobre p {
-            max-width: 90%;
-            margin: 0 auto 1.5rem;
-            font-size: 1rem;
-            line-height: 1.5;
-            color: #4B5E60;
-        }
-
-        .sobre-list {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1rem;
-            max-width: 90%;
-            margin: 0 auto;
-        }
-
-        .sobre-list li {
-            list-style: none;
-            font-size: 0.9rem;
-            color: #1C2526;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.8rem;
-            background: #F8F9FA;
-            border-radius: 8px;
-            transition: transform 0.3s ease;
-        }
-
-        .sobre-list li:hover {
-            transform: translateY(-3px);
-        }
-
-        .sobre-list li i {
-            color: #1C2526;
-            font-size: 1.2rem;
         }
 
         /* Procedimentos com Antes e Depois */
@@ -494,13 +515,9 @@
                 max-width: 600px;
             }
 
-            .carousel {
-                max-width: 600px;
-            }
-
-            .carousel-controls button {
-                font-size: 1.5rem;
-                padding: 0.7rem;
+            .logo-circle {
+                width: 300px;
+                height: 300px;
             }
 
             #sobre {
@@ -529,6 +546,15 @@
 
             .sobre-list li i {
                 font-size: 1.5rem;
+            }
+
+            .carousel {
+                max-width: 600px;
+            }
+
+            .carousel-controls button {
+                font-size: 1.5rem;
+                padding: 0.7rem;
             }
 
             #procedimentos {
@@ -619,21 +645,10 @@
         <a href="#inicio" class="logo">Dra. Samantha <span>Oliveira Tavares</span></a>
     </header>
 
-    <!-- Início com Carrossel -->
+    <!-- Início com Logo Circular -->
     <section id="inicio" class="fade-in">
-        <div class="carousel">
-            <img src="img/1000043050.jpg" alt="Dra. Samantha 1" class="active" loading="lazy" sizes="(max-width: 600px) 480px, 800px">
-            <img src="img/1000043399.jpg" alt="Dra. Samantha 2" loading="lazy" sizes="(max-width: 600px) 480px, 800px">
-            <img src="img/1000063382.jpg" alt="Dra. Samantha 3" loading="lazy"  sizes="(max-width: 600px) 480px, 800px">
-            <img src="img/1000169410.jpg" alt="Dra. Samantha 4" loading="lazy"  sizes="(max-width: 600px) 480px, 800px">
-            <img src="img/Picsart_24-04-30_18-52-40-681~2.jpg" alt="Dra. Samantha 5" loading="lazy"sizes="(max-width: 600px) 480px, 800px">
-            <img src="img/SAMANTHA TAVARES_120.jpg" alt="Dra. Samantha 6" loading="lazy"  sizes="(max-width: 600px) 480px, 800px">
-            <img src="img/SAMANTHA TAVARES_158.jpg" alt="Dra. Samantha 7" loading="lazy" sizes="(max-width: 600px) 480px, 800px">
-            <img src="img/Screenshot_2025-05-29-18-43-12-546_com.instagram.android.jpg" alt="Dra. Samantha 8" loading="lazy"  sizes="(max-width: 600px) 480px, 800px">
-            <div class="carousel-controls">
-                <button onclick="prevSlide()" aria-label="Imagem anterior"><i class="fas fa-chevron-left"></i></button>
-                <button onclick="nextSlide()" aria-label="Próxima imagem"><i class="fas fa-chevron-right"></i></button>
-            </div>
+        <div class="logo-circle">
+            <img src="img/logo.png" alt="Logo Dra. Samantha Oliveira Tavares">
         </div>
         <h1>Dra. Samantha Oliveira Tavares</h1>
         <p>Cirurgiã-Dentista | CRO/PI - 06846</p>
@@ -641,7 +656,7 @@
         <a href="#procedimentos" class="btn">Ver Procedimentos</a>
     </section>
 
-    <!-- Sobre -->
+    <!-- Sobre com Carrossel -->
     <section id="sobre" class="fade-in">
         <h2>Sobre</h2>
         <p>Sou Cirurgiã-Dentista apaixonada por transformar sorrisos com empatia, técnica e dedicação. Meu foco é proporcionar saúde oral e bem-estar, combinando estética e funcionalidade.</p>
@@ -651,6 +666,20 @@
             <li><i class="fas fa-teeth-open"></i> Cirurgia Oral Menor e Endodontia</li>
             <li><i class="fas fa-brush"></i> Tratamento de Gengivite</li>
         </ul>
+        <div class="carousel">
+            <img src="img/1000043050.jpg" alt="Dra. Samantha 1" class="active" loading="lazy" sizes="(max-width: 600px) 480px, 800px">
+            <img src="img/1000043399.jpg" alt="Dra. Samantha 2" loading="lazy" sizes="(max-width: 600px) 480px, 800px">
+            <img src="img/1000063382.jpg" alt="Dra. Samantha 3" loading="lazy" sizes="(max-width: 600px) 480px, 800px">
+            <img src="img/1000169410.jpg" alt="Dra. Samantha 4" loading="lazy" sizes="(max-width: 600px) 480px, 800px">
+            <img src="img/Picsart_24-04-30_18-52-40-681~2.jpg" alt="Dra. Samantha 5" loading="lazy" sizes="(max-width: 600px) 480px, 800px">
+            <img src="img/SAMANTHA TAVARES_120.jpg" alt="Dra. Samantha 6" loading="lazy" sizes="(max-width: 600px) 480px, 800px">
+            <img src="img/SAMANTHA TAVARES_158.jpg" alt="Dra. Samantha 7" loading="lazy" sizes="(max-width: 600px) 480px, 800px">
+            <img src="img/Screenshot_2025-05-29-18-43-12-546_com.instagram.android.jpg" alt="Dra. Samantha 8" loading="lazy" sizes="(max-width: 600px) 480px, 800px">
+            <div class="carousel-controls">
+                <button onclick="prevSlide()" aria-label="Imagem anterior"><i class="fas fa-chevron-left"></i></button>
+                <button onclick="nextSlide()" aria-label="Próxima imagem"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
     </section>
 
     <!-- Procedimentos com Antes e Depois -->
@@ -663,7 +692,7 @@
                 <p>Tratamento de cáries com materiais estéticos de alta qualidade.</p>
                 <div class="before-after-container">
                     <img src="img/1.png" alt="Depois Restauração" class="after-image" loading="lazy" sizes="(max-width: 600px) 480px, 800px">
-                    <img src="img/2.png" alt="Antes Restauração" class="before-image" loading="lazy"sizes="(max-width: 600px) 480px, 800px">
+                    <img src="img/2.png" alt="Antes Restauração" class="before-image" loading="lazy" sizes="(max-width: 600px) 480px, 800px">
                     <div class="slider"></div>
                 </div>
             </div>
