@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Dra. Samantha Oliveira Tavares, Cirurgiã-Dentista em São Raimundo Nonato - PI. Transforme seu sorriso com estética, saúde e bem-estar.">
+    <title>Dra. Samantha Oliveira Tavares - Cirurgiã-Dentista</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #F8F9FA;
+            color: #1C2526;
+            overflow-x: hidden;
+        }
+
+        /* Cabeçalho */
+        header {
+            background: #1C2526;
+            color: #FFFFFF;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        header .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #FFFFFF;
+            text-decoration: none;
+            letter-spacing: 1px;
+            text-align: center;
+        }
+
+        header .logo span {
+            color: #E5E7EB;
+        }
+
+        /* Hero com Carrossel */
+        #inicio {
+            background: #1C2526;
+            color: #FFFFFF;
+            text-align: center;
+            padding: 6rem 1rem 3rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #inicio::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://via.placeholder.com/1920x1080?text=Textura+Sutil') center/cover;
+            opacity: 0.05;
+            z-index: 0;
+        }
+
+        .carousel {
+            position: relative;
+            max-width: 90%;
+            margin: 0 auto 1.5rem;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .carousel img {
+            width: 100%;
+            height: auto;
+            display: none;
+            transition: opacity 0.5s ease;
+            object-fit: cover;
+            loading: lazy;
+        }
+
+        .carousel img.active {
+            display: block;
+        }
+
+        .carousel-controls {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            z-index: 10;
+        }
+
+        .carousel-controls button {
+            background: rgba(0, 0, 0, 0.5);
+            color: #FFFFFF;
+            border: none;
+            padding: 0.5rem;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: background 0.3s ease;
+            touch-action: manipulation;
+        }
+
+        .carousel-controls button:hover {
+            background: #E5E7EB;
+            color: #1C2526;
+        }
+
+        #inicio h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        #inicio p {
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            max-width: 90%;
+        }
+
+        .btn {
+            background-color: #1C2526;
+            color: #FFFFFF;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            margin: 0.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(255, 255, 255, 0.2);
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background-color: #4B5E60;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Sobre */
+        #sobre {
+            padding: 3rem 1rem;
+            background-color: #FFFFFF;
+            text-align: center;
+        }
+
+        #sobre h2 {
+            font-size: 1.8rem;
+            color: #1C2526;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        #sobre h2::after {
+            content: '';
+            width: 40px;
+            height: 2px;
+            background-color: #1C2526;
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        #sobre p {
+            max-width: 90%;
+            margin: 0 auto 1.5rem;
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #4B5E60;
+        }
+
+        .sobre-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            max-width: 90%;
+            margin: 0 auto;
+        }
+
+        .sobre-list li {
+            list-style: none;
+            font-size: 0.9rem;
+            color: #1C2526;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem;
+            background: #F8F9FA;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .sobre-list li:hover {
+            transform: translateY(-3px);
+        }
+
+        .sobre-list li i {
+            color: #1C2526;
+            font-size: 1.2rem;
+        }
+
+        /* Procedimentos com Antes e Depois */
+        #procedimentos {
+            padding: 3rem 1rem;
+            background-color: #F8F9FA;
+            text-align: center;
+        }
+
+        #procedimentos h2 {
+            font-size: 1.8rem;
+            color: #1C2526;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        #procedimentos h2::after {
+            content: '';
+            width: 40px;
+            height: 2px;
+            background-color: #1C2526;
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .procedimentos-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            max-width: 90%;
+            margin: 0 auto;
+        }
+
+        .procedimento-card {
+            background: #FFFFFF;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .procedimento-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .procedimento-card i {
+            color: #1C2526;
+            font-size: 2rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .procedimento-card h3 {
+            color: #1C2526;
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .procedimento-card p {
+            color: #4B5E60;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            margin-bottom: 1rem;
+        }
+
+        /* Antes e Depois Slider */
+        .before-after-container {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+            aspect-ratio: 4 / 3;
+            overflow: hidden;
+        }
+
+        .before-after-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            loading: lazy;
+        }
+
+        .after-image {
+            z-index: 1;
+        }
+
+        .before-image {
+            z-index: 2;
+            clip-path: inset(0 50% 0 0);
+            transition: clip-path 0.1s ease;
+        }
+
+        .slider {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 2px;
+            height: 100%;
+            background: #1C2526;
+            cursor: ew-resize;
+            z-index: 10;
+            transition: left 0.1s ease;
+            box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .slider::before {
+            content: '← →';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #1C2526;
+            color: #FFFFFF;
+            padding: 0.3rem;
+            border-radius: 50%;
+            font-size: 0.7rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slider:active::before {
+            background: #4B5E60;
+        }
+
+        /* Localização */
+        #localizacao {
+            padding: 3rem 1rem;
+            background-color: #FFFFFF;
+            text-align: center;
+        }
+
+        #localizacao h2 {
+            font-size: 1.8rem;
+            color: #1C2526;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        #localizacao h2::after {
+            content: '';
+            width: 40px;
+            height: 2px;
+            background-color: #1C2526;
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        #localizacao p {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            color: #4B5E60;
+        }
+
+        #localizacao iframe {
+            width: 100%;
+            max-width: 90%;
+            height: 300px;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Contato */
+        #contato {
+            padding: 3rem 1rem;
+            background: #1C2526;
+            color: #FFFFFF;
+            text-align: center;
+        }
+
+        #contato h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        #contato h2::after {
+            content: '';
+            width: 40px;
+            height: 2px;
+            background-color: #FFFFFF;
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .contato-links {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .contato-links a {
+            font-size: 1rem;
+            color: #FFFFFF;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .contato-links a:hover {
+            color: #E5E7EB;
+        }
+
+        .contato-links i {
+            font-size: 1.2rem;
+        }
+
+        /* Rodapé */
+        footer {
+            background: #1C2526;
+            color: #FFFFFF;
+            text-align: center;
+            padding: 1.5rem;
+            font-size: 0.8rem;
+        }
+
+        footer p {
+            margin-bottom: 0.3rem;
+        }
+
+        footer .logo {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        footer .logo span {
+            color: #E5E7EB;
+        }
+
+        /* Desktop */
+        @media (min-width: 768px) {
+            header {
+                padding: 1.2rem 3rem;
+            }
+
+            header .logo {
+                font-size: 1.8rem;
+            }
+
+            #inicio {
+                padding: 8rem 2rem 4rem;
+            }
+
+            #inicio h1 {
+                font-size: 3rem;
+            }
+
+            #inicio p {
+                font-size: 1.3rem;
+                max-width: 600px;
+            }
+
+            .carousel {
+                max-width: 600px;
+            }
+
+            .carousel-controls button {
+                font-size: 1.5rem;
+                padding: 0.7rem;
+            }
+
+            #sobre {
+                padding: 5rem 2rem;
+            }
+
+            #sobre h2 {
+                font-size: 2.5rem;
+            }
+
+            #sobre p {
+                max-width: 700px;
+                font-size: 1.1rem;
+            }
+
+            .sobre-list {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 2rem;
+                max-width: 1000px;
+            }
+
+            .sobre-list li {
+                font-size: 1rem;
+                padding: 1rem;
+            }
+
+            .sobre-list li i {
+                font-size: 1.5rem;
+            }
+
+            #procedimentos {
+                padding: 5rem 2rem;
+            }
+
+            #procedimentos h2 {
+                font-size: 2.5rem;
+            }
+
+            .procedimentos-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 2rem;
+                max-width: 1200px;
+            }
+
+            .procedimento-card {
+                padding: 2rem;
+            }
+
+            .procedimento-card h3 {
+                font-size: 1.3rem;
+            }
+
+            .procedimento-card p {
+                font-size: 1rem;
+            }
+
+            .before-after-container {
+                max-width: 500px;
+            }
+
+            #localizacao {
+                padding: 5rem 2rem;
+            }
+
+            #localizacao h2 {
+                font-size: 2.5rem;
+            }
+
+            #localizacao p {
+                font-size: 1.1rem;
+            }
+
+            #localizacao iframe {
+                max-width: 700px;
+                height: 350px;
+            }
+
+            #contato {
+                padding: 5rem 2rem;
+            }
+
+            #contato h2 {
+                font-size: 2.5rem;
+            }
+
+            .contato-links {
+                flex-direction: row;
+                gap: 2rem;
+            }
+
+            .contato-links a {
+                font-size: 1.2rem;
+            }
+
+            .contato-links i {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Animações */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Cabeçalho -->
+    <header>
+        <a href="#inicio" class="logo">Dra. Samantha <span>Oliveira Tavares</span></a>
+    </header>
+
+    <!-- Início com Carrossel -->
+    <section id="inicio" class="fade-in">
+        <div class="carousel">
+            <img src="img/1000043050.jpg" alt="Dra. Samantha 1" class="active" loading="lazy" sizes="(max-width: 600px) 480px, 800px">
+            <img src="img/1000043399.jpg" alt="Dra. Samantha 2" loading="lazy" sizes="(max-width: 600px) 480px, 800px">
+            <img src="img/1000063382.jpg" alt="Dra. Samantha 3" loading="lazy"  sizes="(max-width: 600px) 480px, 800px">
+            <img src="img/1000169410.jpg" alt="Dra. Samantha 4" loading="lazy"  sizes="(max-width: 600px) 480px, 800px">
+            <img src="img/Picsart_24-04-30_18-52-40-681~2.jpg" alt="Dra. Samantha 5" loading="lazy"sizes="(max-width: 600px) 480px, 800px">
+            <img src="img/SAMANTHA TAVARES_120.jpg" alt="Dra. Samantha 6" loading="lazy"  sizes="(max-width: 600px) 480px, 800px">
+            <img src="img/SAMANTHA TAVARES_158.jpg" alt="Dra. Samantha 7" loading="lazy" sizes="(max-width: 600px) 480px, 800px">
+            <img src="img/Screenshot_2025-05-29-18-43-12-546_com.instagram.android.jpg" alt="Dra. Samantha 8" loading="lazy"  sizes="(max-width: 600px) 480px, 800px">
+            <div class="carousel-controls">
+                <button onclick="prevSlide()" aria-label="Imagem anterior"><i class="fas fa-chevron-left"></i></button>
+                <button onclick="nextSlide()" aria-label="Próxima imagem"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+        <h1>Dra. Samantha Oliveira Tavares</h1>
+        <p>Cirurgiã-Dentista | CRO/PI - 06846</p>
+        <a href="https://wa.me/5589981333370" target="_blank" class="btn">Agendar Consulta</a>
+        <a href="#procedimentos" class="btn">Ver Procedimentos</a>
+    </section>
+
+    <!-- Sobre -->
+    <section id="sobre" class="fade-in">
+        <h2>Sobre</h2>
+        <p>Sou Cirurgiã-Dentista apaixonada por transformar sorrisos com empatia, técnica e dedicação. Meu foco é proporcionar saúde oral e bem-estar, combinando estética e funcionalidade.</p>
+        <ul class="sobre-list">
+            <li><i class="fas fa-tooth"></i> Dentística e Estética</li>
+            <li><i class="fas fa-teeth"></i> Reabilitação Oral</li>
+            <li><i class="fas fa-teeth-open"></i> Cirurgia Oral Menor e Endodontia</li>
+            <li><i class="fas fa-brush"></i> Tratamento de Gengivite</li>
+        </ul>
+    </section>
+
+    <!-- Procedimentos com Antes e Depois -->
+    <section id="procedimentos" class="fade-in">
+        <h2>Procedimentos</h2>
+        <div class="procedimentos-grid">
+            <div class="procedimento-card">
+                <i class="fas fa-tooth"></i>
+                <h3>Restaurações</h3>
+                <p>Tratamento de cáries com materiais estéticos de alta qualidade.</p>
+                <div class="before-after-container">
+                    <img src="img/1.png" alt="Depois Restauração" class="after-image" loading="lazy" sizes="(max-width: 600px) 480px, 800px">
+                    <img src="img/2.png" alt="Antes Restauração" class="before-image" loading="lazy"sizes="(max-width: 600px) 480px, 800px">
+                    <div class="slider"></div>
+                </div>
+            </div>
+            <div class="procedimento-card">
+                <i class="fas fa-teeth-open"></i>
+                <h3>Clareamento Dental</h3>
+                <p>Realce a cor do seu sorriso com segurança e conforto.</p>
+                <div class="before-after-container">
+                    <img src="img/3.png" alt="Depois Clareamento" class="after-image" loading="lazy">
+                    <img src="img/4.png" alt="Antes Clareamento" class="before-image" loading="lazy">
+                    <div class="slider"></div>
+                </div>
+            </div>
+            <div class="procedimento-card">
+                <i class="fas fa-brush"></i>
+                <h3>Limpeza Dental</h3>
+                <p>Prevenção e cuidados para uma gengiva saudável.</p>
+                <div class="before-after-container">
+                    <img src="img/5.png" alt="Depois Limpeza" class="after-image" loading="lazy">
+                    <img src="img/6.png" alt="Antes Limpeza" class="before-image" loading="lazy">
+                    <div class="slider"></div>
+                </div>
+            </div>
+            <div class="procedimento-card">
+                <i class="fas fa-teeth"></i>
+                <h3>Reabilitação Oral</h3>
+                <p>Reconstrução do sorriso com próteses personalizadas.</p>
+                <div class="before-after-container">
+                    <img src="https://via.placeholder.com/400x300?text=Depois+Reabilitação" alt="Depois Reabilitação" class="after-image" loading="lazy">
+                    <img src="https://via.placeholder.com/400x300?text=Antes+Reabilitação" alt="Antes Reabilitação" class="before-image" loading="lazy">
+                    <div class="slider"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Localização -->
+    <section id="localizacao" class="fade-in">
+        <h2>Localização</h2>
+        <p><i class="fas fa-map-marker-alt"></i> Rua Dr Barroso, 249, Aldeia, São Raimundo Nonato – PI</p>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3952.271784058423!2d-42.6987450851849!3d-9.015357993520672!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zOcKwMDAnNTUuMyJTIDQzwrA0MSc1My41Ilc!5e0!3m2!1spt-BR!2sbr!4v1634567890123" allowfullscreen="" loading="lazy" aria-label="Mapa da localização"></iframe>
+    </section>
+
+    <!-- Contato -->
+    <section id="contato" class="fade-in">
+        <h2>Contato</h2>
+        <div class="contato-links">
+            <a href="https://wa.me/5589981333370" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp: (89) 98133-3370</a>
+            <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
+        </div>
+        <a href="https://wa.me/5589981333370" target="_blank" class="btn">Agende agora pelo WhatsApp</a>
+    </section>
+
+    <!-- Rodapé -->
+    <footer>
+        <p>Dra. Samantha Oliveira Tavares - Cirurgiã-Dentista | CRO/PI - 06846</p>
+        <p class="logo">Dra. Samantha <span>Oliveira Tavares</span></p>
+        <p>Desenvolvido por Eita Devis</p>
+    </footer>
+
+    <script>
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                target.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // Animação de fade-in
+        const fadeElements = document.querySelectorAll('.fade-in');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.2 });
+        fadeElements.forEach(element => observer.observe(element));
+
+        // Carrossel
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.carousel img');
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === index);
+            });
+        }
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            showSlide(currentSlide);
+        }
+        setInterval(nextSlide, 5000);
+
+        // Antes e Depois Slider
+        const sliders = document.querySelectorAll('.before-after-container');
+        sliders.forEach(container => {
+            const beforeImage = container.querySelector('.before-image');
+            const slider = container.querySelector('.slider');
+            let isDragging = false;
+
+            const handleDragStart = (e) => {
+                isDragging = true;
+                e.preventDefault();
+            };
+
+            const handleDragMove = (e) => {
+                if (!isDragging) return;
+                e.preventDefault();
+                const rect = container.getBoundingClientRect();
+                let x = e.type.includes('touch') ? e.touches[0].clientX - rect.left : e.clientX - rect.left;
+                x = Math.max(0, Math.min(x, rect.width));
+                const widthPercent = (x / rect.width) * 100;
+                beforeImage.style.clipPath = `inset(0 ${100 - widthPercent}% 0 0)`;
+                slider.style.left = `calc(${widthPercent}% - 1px)`;
+            };
+
+            const handleDragEnd = () => {
+                isDragging = false;
+            };
+
+            slider.addEventListener('mousedown', handleDragStart);
+            slider.addEventListener('touchstart', handleDragStart, { passive: false });
+            document.addEventListener('mousemove', handleDragMove);
+            document.addEventListener('touchmove', handleDragMove, { passive: false });
+            document.addEventListener('mouseup', handleDragEnd);
+            document.addEventListener('touchend', handleDragEnd);
+        });
+    </script>
+</body>
+</html>
