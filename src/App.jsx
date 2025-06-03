@@ -73,17 +73,11 @@ function App() {
     const [sliderPosition, setSliderPosition] = useState(50);
     const [showInstruction, setShowInstruction] = useState(true);
 
-    const debounce = (func, wait) => {
-      let timeout;
-      return (...args) => {
-        clearTimeout(timeout);
-        timeout = setTimeout(() => func(...args), wait);
-      };
-    };
-
-    const handleDragMove = debounce((e) => {
+    const handleDragMove = (e) => {
       if (!isDragging || !containerRef.current) return;
-      e.preventDefault();
+      if (e.type.includes('touch')) {
+        e.preventDefault();
+      }
       setShowInstruction(false);
       const rect = containerRef.current.getBoundingClientRect();
       const clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
@@ -91,7 +85,7 @@ function App() {
       x = Math.max(0, Math.min(x, rect.width));
       const widthPercent = (x / rect.width) * 100;
       setSliderPosition(widthPercent);
-    }, 10);
+    };
 
     const handleKeyDown = (e) => {
       if (e.key === 'ArrowLeft') {
@@ -117,7 +111,7 @@ function App() {
         document.removeEventListener('mouseup', handleMouseUp);
         document.removeEventListener('touchend', handleMouseUp);
       };
-    }, [isDragging, handleDragMove]);
+    }, [isDragging]);
 
     return (
       <div
