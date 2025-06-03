@@ -76,7 +76,7 @@ function App() {
     const handleDragMove = (e) => {
       if (!isDragging || !containerRef.current) return;
       if (e.type.includes('touch')) {
-        e.preventDefault();
+        e.preventDefault(); // Evita scroll da página durante o arrastar em dispositivos de toque
       }
       setShowInstruction(false);
       const rect = containerRef.current.getBoundingClientRect();
@@ -119,8 +119,6 @@ function App() {
         ref={containerRef}
         role="region"
         aria-label={altText}
-        tabIndex={0}
-        onKeyDown={handleKeyDown}
       >
         <img src={afterImage} alt={`Depois ${altText}`} className="after-image" loading="lazy" />
         <img
@@ -132,12 +130,22 @@ function App() {
         />
         <div
           className="slider"
+          role="slider"
+          tabIndex={0}
+          aria-valuemin={0}
+          aria-valuemax={100}
+          aria-valuenow={Math.round(sliderPosition)}
+          aria-label="Controle de comparação"
           style={{ left: `calc(${sliderPosition}% - 2px)` }}
           onMouseDown={handleMouseDown}
           onTouchStart={handleMouseDown}
-          aria-label="Controle de comparação"
+          onKeyDown={handleKeyDown}
         />
-        {showInstruction && <div className="slider-instruction">Arraste para comparar</div>}
+        {showInstruction && (
+          <div className="slider-instruction" role="note">
+            Arraste ou use as setas do teclado para comparar
+          </div>
+        )}
       </div>
     );
   };
