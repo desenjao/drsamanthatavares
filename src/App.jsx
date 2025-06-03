@@ -94,6 +94,12 @@ function App() {
       preloadImages();
     }, [beforeImage, afterImage]);
 
+    // Temporizador para ocultar instrução
+    useEffect(() => {
+      const timer = setTimeout(() => setShowInstruction(false), 3000);
+      return () => clearTimeout(timer);
+    }, []);
+
     const debounce = (func, wait) => {
       return (...args) => {
         if (debounceTimeout.current) {
@@ -159,15 +165,13 @@ function App() {
         role="region"
         aria-label={altText}
       >
-        <div className="after-image-wrapper">
-          <img src={afterImage} alt={`Depois ${altText}`} className="after-image" />
-        </div>
-        <div
-          className="before-image-wrapper"
-          style={{ width: `${sliderPosition}%` }}
-        >
-          <img src={beforeImage} alt={`Antes ${altText}`} className="before-image" />
-        </div>
+        <img src={afterImage} alt={`Depois ${altText}`} className="after-image" />
+        <img
+          src={beforeImage}
+          alt={`Antes ${altText}`}
+          className="before-image"
+          style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
+        />
         <div
           className="slider"
           role="slider"
@@ -183,7 +187,7 @@ function App() {
         />
         {showInstruction && (
           <div className="slider-instruction" role="note">
-            Arraste ou use as setas para comparar
+            Arraste para comparar
           </div>
         )}
       </div>
@@ -322,7 +326,7 @@ function App() {
                 className={`indicator ${index === currentSlide ? 'active' : ''}`}
                 onClick={() => showSlide(index)}
                 role="button"
-                aria-label={`Ir para imagem ${index + 1}`}
+                aria-label="Ir para a imagem ${index + 1}"
               />
             ))}
           </div>
@@ -337,8 +341,8 @@ function App() {
             <h3>Restaurações</h3>
             <p>Tratamento de cáries com materiais estéticos de alta qualidade.</p>
             <BeforeAfterSlider
-              beforeImage="/images/1.png"
-              afterImage="/images/2.png"
+              beforeImage="/images/1.jpg"
+              afterImage="/images/2.jpg"
               altText="Comparação antes e depois de restaurações"
             />
             <a href="#contato" className="btn secondary-btn" aria-label="Saiba mais sobre restaurações">
@@ -350,8 +354,8 @@ function App() {
             <h3>Clareamento Dental</h3>
             <p>Realce a cor do seu sorriso com segurança e conforto.</p>
             <BeforeAfterSlider
-              beforeImage="/images/3.png"
-              afterImage="/images/4.png"
+              beforeImage="/images/3.jpg"
+              afterImage="/images/4.jpg"
               altText="Comparação antes e depois de clareamento dental"
             />
             <a href="#contato" className="btn secondary-btn" aria-label="Saiba mais sobre clareamento dental">
@@ -363,8 +367,8 @@ function App() {
             <h3>Limpeza Dental</h3>
             <p>Prevenção e cuidados para uma gengiva saudável.</p>
             <BeforeAfterSlider
-              beforeImage="/images/5.png"
-              afterImage="/images/6.png"
+              beforeImage="/images/5.jpg"
+              afterImage="/images/6.jpg"
               altText="Comparação antes e depois de limpeza dental"
             />
             <a href="#contato" className="btn secondary-btn" aria-label="Saiba mais sobre limpeza dental">
@@ -376,8 +380,8 @@ function App() {
             <h3>Reabilitação Oral</h3>
             <p>Reconstrução do sorriso com próteses personalizadas.</p>
             <BeforeAfterSlider
-              beforeImage="/images/7.png"
-              afterImage="/images/8.png"
+              beforeImage="/images/7.jpg"
+              afterImage="/images/8.jpg"
               altText="Comparação antes e depois de reabilitação oral"
             />
             <a href="#contato" className="btn secondary-btn" aria-label="Saiba mais sobre reabilitação oral">
@@ -428,16 +432,16 @@ function App() {
           href="https://wa.me/5589981333370"
           target="_blank"
           className="btn primary-btn"
-          aria-label="Agendar consulta via WhatsApp"
+          aria-label="Agendar consulta agora pelo WhatsApp"
         >
-          Agende agora pelo WhatsApp
+          Agendar agora pelo WhatsApp
         </a>
       </section>
 
       <footer role="contentinfo">
         <p>Dra. Samantha Oliveira Tavares - Cirurgiã-Dentista | CRO/PI - 06846</p>
         <p className="logo">
-          Dra. Samantha <span>Oliveira Tavares</span>
+          Dra. Samantha <br /> <span>Oliveira Tavares</span>
         </p>
         <p>Desenvolvido por Eita Devis</p>
       </footer>
