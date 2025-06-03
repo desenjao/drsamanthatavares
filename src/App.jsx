@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback, memo } from 'react';
 import './App.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTooth, faTeeth, faTeethOpen, faBrush, faMapMarkerAlt, faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
@@ -51,7 +51,7 @@ function App() {
   const showSlide = (index) => {
     setCurrentSlide(index);
     setIsCarouselPaused(true);
-    setTimeout(() => setIsCarouselPaused(false), 30000); // Resume após 30s
+    setTimeout(() => setIsCarouselPaused(false), 30000);
   };
 
   const nextSlide = () => {
@@ -67,16 +67,46 @@ function App() {
   };
 
   // Componente Before-After Slider
-  const BeforeAfterSlider = ({ beforeImage, afterImage, altText }) => {
+  const BeforeAfterSlider = memo(({ beforeImage, afterImage, altText }) => {
     const containerRef = useRef(null);
     const [isDragging, setIsDragging] = useState(false);
     const [sliderPosition, setSliderPosition] = useState(50);
     const [showInstruction, setShowInstruction] = useState(true);
+    const debounceTimeout = useRef(null);
 
-    const handleDragMove = (e) => {
+    // Pré-carregamento das imagens
+    useEffect(() => {
+      const preloadImages = () => {
+        const preloadLinks = [];
+        [beforeImage, afterImage].forEach((src) => {
+          const link = document.createElement('link');
+          link.rel = 'preload';
+          link.href = src;
+          link.as = 'image';
+          link.fetchPriority = 'high';
+          document.head.appendChild(link);
+          preloadLinks.push(link);
+        });
+        return () => {
+          preloadLinks.forEach(link => document.head.removeChild(link));
+        };
+      };
+      preloadImages();
+    }, [beforeImage, afterImage]);
+
+    const debounce = (func, wait) => {
+      return (...args) => {
+        if (debounceTimeout.current) {
+          clearTimeout(debounceTimeout.current);
+        }
+        debounceTimeout.current = setTimeout(() => func(...args), wait);
+      };
+    };
+
+    const handleDragMove = useCallback((e) => {
       if (!isDragging || !containerRef.current) return;
       if (e.type.includes('touch')) {
-        e.preventDefault(); // Evita scroll da página durante o arrastar em dispositivos de toque
+        e.preventDefault(); // Evita scroll durante o arrastar
       }
       setShowInstruction(false);
       const rect = containerRef.current.getBoundingClientRect();
@@ -85,9 +115,11 @@ function App() {
       x = Math.max(0, Math.min(x, rect.width));
       const widthPercent = (x / rect.width) * 100;
       setSliderPosition(widthPercent);
-    };
+    }, [isDragging]);
 
-    const handleKeyDown = (e) => {
+    const debouncedHandleDragMove = debounce(handleDragMove, 16); // 60fps para toque
+
+    const handleKeyDown = useCallback((e) => {
       if (e.key === 'ArrowLeft') {
         setSliderPosition((prev) => Math.max(prev - 5, 0));
         setShowInstruction(false);
@@ -95,23 +127,30 @@ function App() {
         setSliderPosition((prev) => Math.min(prev + 5, 100));
         setShowInstruction(false);
       }
-    };
+    }, []);
 
-    const handleMouseDown = () => setIsDragging(true);
-    const handleMouseUp = () => setIsDragging(false);
+    const handleMouseDown = useCallback(() => setIsDragging(true), []);
+    const handleMouseUp = useCallback(() => setIsDragging(false), []);
 
     useEffect(() => {
-      document.addEventListener('mousemove', handleDragMove);
-      document.addEventListener('touchmove', handleDragMove, { passive: false });
+      const moveHandler = (e) => {
+        if (e.type.includes('touch')) {
+          debouncedHandleDragMove(e);
+        } else {
+          handleDragMove(e);
+        }
+      };
+      document.addEventListener('mousemove', moveHandler);
+      document.addEventListener('touchmove', moveHandler, { passive: false });
       document.addEventListener('mouseup', handleMouseUp);
       document.addEventListener('touchend', handleMouseUp);
       return () => {
-        document.removeEventListener('mousemove', handleDragMove);
-        document.removeEventListener('touchmove', handleDragMove);
+        document.removeEventListener('mousemove', moveHandler);
+        document.removeEventListener('touchmove', moveHandler);
         document.removeEventListener('mouseup', handleMouseUp);
         document.removeEventListener('touchend', handleMouseUp);
       };
-    }, [isDragging]);
+    }, [isDragging, handleDragMove, handleMouseUp, debouncedHandleDragMove]);
 
     return (
       <div
@@ -120,14 +159,15 @@ function App() {
         role="region"
         aria-label={altText}
       >
-        <img src={afterImage} alt={`Depois ${altText}`} className="after-image" loading="lazy" />
-        <img
-          src={beforeImage}
-          alt={`Antes ${altText}`}
-          className="before-image"
-          style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
-          loading="lazy"
-        />
+        <div className="after-image-wrapper">
+          <img src={afterImage} alt={`Depois ${altText}`} className="after-image" />
+        </div>
+        <div
+          className="before-image-wrapper"
+          style={{ width: `${sliderPosition}%` }}
+        >
+          <img src={beforeImage} alt={`Antes ${altText}`} className="before-image" />
+        </div>
         <div
           className="slider"
           role="slider"
@@ -143,12 +183,12 @@ function App() {
         />
         {showInstruction && (
           <div className="slider-instruction" role="note">
-            Arraste ou use as setas do teclado para comparar
+            Arraste ou use as setas para comparar
           </div>
         )}
       </div>
     );
-  };
+  });
 
   // Smooth scroll e fade-in
   useEffect(() => {

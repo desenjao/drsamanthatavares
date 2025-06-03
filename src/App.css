@@ -324,6 +324,21 @@ header .logo span {
     aspect-ratio: 4 / 3;
     overflow: hidden;
 }
+.after-image-wrapper,
+.before-image-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+.after-image-wrapper {
+    z-index: 1;
+}
+.before-image-wrapper {
+    z-index: 2;
+}
 .before-after-container img {
     width: 100%;
     height: 100%;
@@ -332,13 +347,6 @@ header .logo span {
     position: absolute;
     top: 0;
     left: 0;
-}
-.after-image {
-    z-index: 1;
-}
-.before-image {
-    z-index: 2;
-    transition: clip-path 0.1s ease;
 }
 .slider {
     position: absolute;
@@ -349,7 +357,6 @@ header .logo span {
     background: #1C2526;
     cursor: ew-resize;
     z-index: 10;
-    transition: left 0.1s ease;
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
 }
 .slider::before {
@@ -373,6 +380,10 @@ header .logo span {
 .slider:active::before {
     background: #4B5E60;
 }
+.slider:focus {
+    outline: 2px solid #2ECC71;
+    outline-offset: 2px;
+}
 .slider-instruction {
     position: absolute;
     bottom: 10px;
@@ -380,11 +391,36 @@ header .logo span {
     transform: translateX(-50%);
     background: rgba(0, 0, 0, 0.7);
     color: #FFFFFF;
-    padding: 0.5rem 1rem;
-    border-radius: 5px;
-    font-size: 0.9rem;
-    z-index: 10;
-    transition: opacity 0.3s ease;
+    padding: 0.3rem 0.8rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    z-index: 2;
+    opacity: 0.8;
+    white-space: nowrap;
+}
+@media (max-width: 767px) {
+    .before-after-container {
+        max-width: 100%;
+    }
+    .slider-instruction {
+        font-size: 0.7rem;
+        padding: 0.2rem 0.6rem;
+    }
+    .before-image-wrapper,
+    .slider {
+        transition: none; /* Remove transições em dispositivos móveis */
+    }
+}
+@media (min-width: 768px) {
+    .before-after-container {
+        max-width: 400px;
+    }
+    .before-image-wrapper {
+        transition: width 0.1s ease;
+    }
+    .slider {
+        transition: left 0.1s ease;
+    }
 }
 
 #localizacao {
@@ -521,11 +557,11 @@ footer {
 footer p {
     margin-bottom: 0.3rem;
 }
-footer .logo {
+footer a.logo {
     font-size: 1.2rem;
     font-weight: 600;
 }
-footer .logo span {
+footer a.logo span {
     color: #E5E7EB;
 }
 
@@ -533,7 +569,7 @@ footer .logo span {
     header {
         padding: 1.2rem 3rem;
     }
-    header .logo {
+    header a.logo {
         font-size: 1.8rem;
     }
     #inicio {
@@ -582,9 +618,6 @@ footer .logo span {
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
         gap: 2rem;
         max-width: 1200px;
-    }
-    .before-after-container {
-        max-width: 500px;
     }
     #localizacao {
         padding: 5rem 2rem;
