@@ -341,8 +341,8 @@ function App() {
             <h3>Restaurações</h3>
             <p>Tratamento de cáries com materiais estéticos de alta qualidade.</p>
             <BeforeAfterSlider
-              beforeImage="/images/1.jpg"
-              afterImage="/images/2.jpg"
+              beforeImage="/images/1.png"
+              afterImage="/images/2.png"
               altText="Comparação antes e depois de restaurações"
             />
             <a href="#contato" className="btn secondary-btn" aria-label="Saiba mais sobre restaurações">
@@ -354,8 +354,8 @@ function App() {
             <h3>Clareamento Dental</h3>
             <p>Realce a cor do seu sorriso com segurança e conforto.</p>
             <BeforeAfterSlider
-              beforeImage="/images/3.jpg"
-              afterImage="/images/4.jpg"
+              beforeImage="/images/3.png"
+              afterImage="/images/4.png"
               altText="Comparação antes e depois de clareamento dental"
             />
             <a href="#contato" className="btn secondary-btn" aria-label="Saiba mais sobre clareamento dental">
@@ -367,8 +367,8 @@ function App() {
             <h3>Limpeza Dental</h3>
             <p>Prevenção e cuidados para uma gengiva saudável.</p>
             <BeforeAfterSlider
-              beforeImage="/images/5.jpg"
-              afterImage="/images/6.jpg"
+              beforeImage="/images/5.png"
+              afterImage="/images/6.png"
               altText="Comparação antes e depois de limpeza dental"
             />
             <a href="#contato" className="btn secondary-btn" aria-label="Saiba mais sobre limpeza dental">
@@ -380,8 +380,8 @@ function App() {
             <h3>Reabilitação Oral</h3>
             <p>Reconstrução do sorriso com próteses personalizadas.</p>
             <BeforeAfterSlider
-              beforeImage="/images/7.jpg"
-              afterImage="/images/8.jpg"
+              beforeImage="/images/7.png"
+              afterImage="/images/8.png"
               altText="Comparação antes e depois de reabilitação oral"
             />
             <a href="#contato" className="btn secondary-btn" aria-label="Saiba mais sobre reabilitação oral">
