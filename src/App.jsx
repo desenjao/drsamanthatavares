@@ -256,7 +256,7 @@ function App() {
         <div className="logo-background"></div>
         <div className="logo-circle">
           <img
-            src="/images/logo.png"
+            src="/images/logo1.png"
             alt="Logo Dra. Samantha Oliveira Tavares"
             loading="lazy"
           />
