@@ -34,6 +34,34 @@ body {
   color: var(--primary-color);
   line-height: 1.6;
 }
+@font-face {
+  font-family: 'Missousy';
+  src: url('../fonts/Missousy-Free.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+.sobre-list-item {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Espaço entre ícone e texto */
+  font-size: 1.1rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.sobre-list-icon {
+  width: 30px;
+  font-size: 1.5rem; /* Tamanho do ícone */
+  color: #e91e63; /* Rosa para lembrar a gengiva */
+  transition: transform 0.2s ease; /* Animação suave */
+}
+
+.sobre-list-item:hover .sobre-list-icon {
+  transform: scale(1.1); /* Efeito de zoom no hover */
+}
+
 
 .manuscrita {
   font-family: 'Dancing Script', cursive;
