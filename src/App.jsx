@@ -392,22 +392,59 @@ function App() {
         </div>
       </section>
 
-      <section id="localizacao" className="fade-in">
-        <h2>Localização</h2>
-        <p>
-          <FontAwesomeIcon icon={faMapMarkerAlt} />
-          MAIS SAÚDE - Rua Dr Barroso, 249, Aldeia, São Raimundo Nonato – PI
-        </p>
-        <div className="map-container">
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3952.271784058423!2d-42.6987450851849!3d-9.015357993520672!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zOcKwMDAnNTUuMyJTIDQywrA0MSc1My41Ilc!5e0!3m2!1spt-BR!2sbr!4v1634567890123"
-            allowFullScreen=""
-            loading="lazy"
-            aria-label="Mapa da localização"
-            className="map-iframe"
-          />
-        </div>
-      </section>
+     <section id="localizacao" className="fade-in">
+  <h2>Localização</h2>
+  <p>
+    <FontAwesomeIcon icon={faMapMarkerAlt} />{' '}
+    MAIS SAÚDE - Rua Dr Barroso, 249, Aldeia, São Raimundo Nonato – PI
+  </p>
+
+  {/* Container do mapa */}
+  <div
+    style={{
+      width: '100%',
+      maxWidth: '800px',
+      height: '400px',
+      margin: '0 auto',
+      borderRadius: '12px',
+      overflow: 'hidden',
+      boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
+    }}
+  >
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15880.66723833371!2d-42.6974333!3d-9.0167288!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x77a051dada60001%3A0xd5a78b96068de6c7!2sMais%20Sa%C3%BAde%20Centro%20Integrado!5e0!3m2!1spt-BR!2sbr!4v1717840000000!5m2!1spt-BR!2sbr"
+      width="100%"
+      height="100%"
+      style={{ border: 0 }}
+      allowFullScreen=""
+      loading="lazy"
+      referrerPolicy="no-referrer-when-downgrade"
+      title="Mapa da localização – Mais Saúde Centro Integrado"
+    ></iframe>
+  </div>
+
+  {/* Botão de rota */}
+  <div style={{ marginTop: '1rem', textAlign: 'center' }}>
+    <a
+      href="https://www.google.com/maps/dir/?api=1&destination=-9.0167288,-42.6974333"
+      target="_blank"
+      rel="noopener noreferrer"
+      style={{
+        backgroundColor: '#28a745',
+        color: '#fff',
+        padding: '12px 24px',
+        borderRadius: '8px',
+        textDecoration: 'none',
+        fontWeight: 'bold',
+        display: 'inline-block',
+        boxShadow: '0 2px 6px rgba(0,0,0,0.15)'
+      }}
+    >
+      Ver rota no Google Maps
+    </a>
+  </div>
+</section>
+
 
       <section id="contato" className="fade-in">
         <h2>Contato</h2>
