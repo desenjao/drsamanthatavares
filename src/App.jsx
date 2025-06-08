@@ -247,7 +247,9 @@ function App() {
       <header role="banner">
         <nav role="navigation" aria-label="Navegação principal">
           <a href="#inicio" className="logo">
-            <span className="manuscrita">Dra. Samantha Oliveira Tavares</span>
+            <span style={{ fontFamily: 'Missousy' }}>
+              Dra. Samantha Oliveira Tavares
+            </span>
           </a>
         </nav>
       </header>
@@ -395,7 +397,7 @@ function App() {
         <h2>Localização</h2>
         <p>
           <FontAwesomeIcon icon={faMapMarkerAlt} />
-          Rua Dr Barroso, 249, Aldeia, São Raimundo Nonato – PI
+          MAIS SAÚDE - Rua Dr Barroso, 249, Aldeia, São Raimundo Nonato – PI
         </p>
         <div className="map-container">
           <iframe
