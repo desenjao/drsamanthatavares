@@ -289,8 +289,9 @@ function App() {
             <img
               src="/images/gengivas.png"
               alt="Ícone de gengiva"
-              className="sobre-list-icon"
+              className="sobre-list-icon1"
               loading="lazy"
+              
             />
             Tratamento de Gengivite e Periodontite
           </li>

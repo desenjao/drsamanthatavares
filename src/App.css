@@ -57,6 +57,9 @@ body {
   color: #e91e63; /* Rosa para lembrar a gengiva */
   transition: transform 0.2s ease; /* Animação suave */
 }
+.sobre-list-icon1{
+  width: 24px;
+}
 
 .sobre-list-item:hover .sobre-list-icon {
   transform: scale(1.1); /* Efeito de zoom no hover */
