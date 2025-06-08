@@ -72,9 +72,9 @@ function App() {
     const [isDragging, setIsDragging] = useState(false);
     const [sliderPosition, setSliderPosition] = useState(50);
     const [showInstruction, setShowInstruction] = useState(true);
-    const debounceTimeout = useRef(null);
+    const rafId = useRef(null);
 
-    // Pré-carregamento das imagens
+    // Pré-carregamento (mantido igual)
     useEffect(() => {
       const preloadImages = () => {
         const preloadLinks = [];
@@ -94,25 +94,15 @@ function App() {
       preloadImages();
     }, [beforeImage, afterImage]);
 
-    // Temporizador para ocultar instrução
     useEffect(() => {
       const timer = setTimeout(() => setShowInstruction(false), 3000);
       return () => clearTimeout(timer);
     }, []);
 
-    const debounce = (func, wait) => {
-      return (...args) => {
-        if (debounceTimeout.current) {
-          clearTimeout(debounceTimeout.current);
-        }
-        debounceTimeout.current = setTimeout(() => func(...args), wait);
-      };
-    };
-
     const handleDragMove = useCallback((e) => {
       if (!isDragging || !containerRef.current) return;
       if (e.type.includes('touch')) {
-        e.preventDefault(); // Evita scroll durante o arrastar
+        e.preventDefault();
       }
       setShowInstruction(false);
       const rect = containerRef.current.getBoundingClientRect();
@@ -120,10 +110,31 @@ function App() {
       let x = clientX - rect.left;
       x = Math.max(0, Math.min(x, rect.width));
       const widthPercent = (x / rect.width) * 100;
-      setSliderPosition(widthPercent);
+
+      // Usar requestAnimationFrame para suavizar atualizações
+      if (rafId.current) cancelAnimationFrame(rafId.current);
+      rafId.current = requestAnimationFrame(() => {
+        setSliderPosition(widthPercent);
+      });
     }, [isDragging]);
 
-    const debouncedHandleDragMove = debounce(handleDragMove, 16); // 60fps para toque
+    const handleMouseDown = useCallback(() => setIsDragging(true), []);
+    const handleMouseUp = useCallback(() => setIsDragging(false), []);
+
+    useEffect(() => {
+      const moveHandler = (e) => handleDragMove(e);
+      document.addEventListener('mousemove', moveHandler, { passive: true });
+      document.addEventListener('touchmove', moveHandler, { passive: false });
+      document.addEventListener('mouseup', handleMouseUp);
+      document.addEventListener('touchend', handleMouseUp);
+      return () => {
+        document.removeEventListener('mousemove', moveHandler);
+        document.removeEventListener('touchmove', moveHandler);
+        document.removeEventListener('mouseup', handleMouseUp);
+        document.removeEventListener('touchend', handleMouseUp);
+        if (rafId.current) cancelAnimationFrame(rafId.current);
+      };
+    }, [handleDragMove, handleMouseUp]);
 
     const handleKeyDown = useCallback((e) => {
       if (e.key === 'ArrowLeft') {
@@ -134,29 +145,6 @@ function App() {
         setShowInstruction(false);
       }
     }, []);
-
-    const handleMouseDown = useCallback(() => setIsDragging(true), []);
-    const handleMouseUp = useCallback(() => setIsDragging(false), []);
-
-    useEffect(() => {
-      const moveHandler = (e) => {
-        if (e.type.includes('touch')) {
-          debouncedHandleDragMove(e);
-        } else {
-          handleDragMove(e);
-        }
-      };
-      document.addEventListener('mousemove', moveHandler);
-      document.addEventListener('touchmove', moveHandler, { passive: false });
-      document.addEventListener('mouseup', handleMouseUp);
-      document.addEventListener('touchend', handleMouseUp);
-      return () => {
-        document.removeEventListener('mousemove', moveHandler);
-        document.removeEventListener('touchmove', moveHandler);
-        document.removeEventListener('mouseup', handleMouseUp);
-        document.removeEventListener('touchend', handleMouseUp);
-      };
-    }, [isDragging, handleDragMove, handleMouseUp, debouncedHandleDragMove]);
 
     return (
       <div
@@ -291,15 +279,20 @@ function App() {
           </li>
           <li>
             <FontAwesomeIcon icon={faTeeth} />
-            Reabilitação Oral
+            Reabilitação Oral (Prótese)
           </li>
           <li>
             <FontAwesomeIcon icon={faTeethOpen} />
             Clareamento Dental
           </li>
           <li>
-            <FontAwesomeIcon icon={faBrush} />
-            Tratamento de Gengivite
+            <img
+              src="/images/gengivas.png"
+              alt="Ícone de gengiva"
+              className="sobre-list-icon"
+              loading="lazy"
+            />
+            Tratamento de Gengivite e Periodontite
           </li>
         </ul>
         <div className="carousel" role="region" aria-label="Carrossel de imagens">
@@ -365,7 +358,12 @@ function App() {
             </a>
           </div>
           <div className="procedimento-card">
-            <FontAwesomeIcon icon={faBrush} />
+            <img
+              src="/images/gengivas.png"
+              alt="Ícone de gengiva"
+              className="sobre-list-icon"
+              loading="lazy"
+            />
             <h3>Limpeza Dental</h3>
             <p>Prevenção e cuidados para uma gengiva saudável.</p>
             <BeforeAfterSlider
